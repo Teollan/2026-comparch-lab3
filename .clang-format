@@ -5,7 +5,9 @@ AccessModifierOffset: -4
 AllowShortFunctionsOnASingleLine: Empty
 AllowShortIfStatementsOnASingleLine: Never
 AlignAfterOpenBracket: BlockIndent
+BinPackArguments: false
 BinPackParameters: false
-AllowAllParametersOfDeclarationOnNextLine: false
+AllowAllArgumentsOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: true
 BreakConstructorInitializers: AfterColon
 PenaltyReturnTypeOnItsOwnLine: 10000
