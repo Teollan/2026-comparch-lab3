@@ -3,7 +3,7 @@
 std::vector<Instruction> decompile(std::vector<std::uint8_t> &bytes) {
     std::vector<Instruction> instructions;
 
-    std::vector<std::uint8_t>::iterator iterator = bytes.begin();
+    auto iterator = bytes.begin();
     while (iterator != bytes.end()) {
         std::optional<Instruction> instruction = std::nullopt;
 

@@ -52,3 +52,18 @@ std::string formatLiteral32(const std::vector<std::uint8_t> &bytes) {
 
     return std::format("{}", std::bit_cast<std::int32_t>(raw));
 }
+
+std::uint8_t getOperandBitWidth(OperandType type) {
+    switch (type) {
+        case OperandType::Register:
+            return 4;
+        case OperandType::Address:
+            return 32;
+        case OperandType::Literal16:
+            return 16;
+        case OperandType::Literal32:
+            return 32;
+        default:
+            throw std::invalid_argument("Unknown operand type");
+    }
+}
