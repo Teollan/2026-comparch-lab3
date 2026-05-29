@@ -17,3 +17,6 @@ compile_commands.json
 
 # LLMs
 .claude/
+
+# Python
+.venv/

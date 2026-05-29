@@ -27,8 +27,15 @@ std::vector<std::uint8_t> hexToBytes(std::string_view hex) {
     std::vector<std::uint8_t> result;
     int high = -1;
 
-    for (char nibble : hex) {
-        int value = hexDigitValue(nibble);
+    for (std::size_t i = 0; i < hex.size(); i++) {
+        if (hex[i] == '/' && i + 1 < hex.size() && hex[i + 1] == '/') {
+            while (i < hex.size() && hex[i] != '\n') {
+                i++;
+            }
+            continue;
+        }
+
+        int value = hexDigitValue(hex[i]);
 
         if (value < 0) {
             continue;

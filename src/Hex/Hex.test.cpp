@@ -46,6 +46,35 @@ TEST(hexToBytes, NonHexCharsAreSkipped) {
     EXPECT_EQ(hexToBytes("0A, 12; 80 | AF"), (Bytes{0x0A, 0x12, 0x80, 0xAF}));
 }
 
+TEST(hexToBytes, LineCommentIsSkipped) {
+    EXPECT_EQ(
+        hexToBytes("0A 12 // SUB R1, R2\n80 AF // CMP R10, R15\n"),
+        (Bytes{0x0A, 0x12, 0x80, 0xAF})
+    );
+}
+
+TEST(hexToBytes, FullLineComment) {
+    EXPECT_EQ(
+        hexToBytes("// this is a header comment\n0A 12\n"),
+        (Bytes{0x0A, 0x12})
+    );
+}
+
+TEST(hexToBytes, CommentSkipsHexLikeChars) {
+    EXPECT_EQ(
+        hexToBytes("0A 12 // AF BE EF\n80 AF"),
+        (Bytes{0x0A, 0x12, 0x80, 0xAF})
+    );
+}
+
+TEST(hexToBytes, CommentAtEndOfInputWithoutNewline) {
+    EXPECT_EQ(hexToBytes("0A 12 // no trailing newline"), (Bytes{0x0A, 0x12}));
+}
+
+TEST(hexToBytes, SingleSlashIsNotAComment) {
+    EXPECT_EQ(hexToBytes("0A / 12"), (Bytes{0x0A, 0x12}));
+}
+
 TEST(bytesToHex, Empty) {
     EXPECT_EQ(bytesToHex({}), "");
 }
