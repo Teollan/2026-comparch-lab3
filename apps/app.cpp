@@ -19,7 +19,9 @@ int main(int argc, char *argv[]) {
         args.parse();
     } catch (const ArgsException &e) {
         std::cerr << e.what() << "\n";
+
         args.printUsage();
+
         return 1;
     }
 
@@ -27,13 +29,16 @@ int main(int argc, char *argv[]) {
     if (!input) {
         std::cerr << "Failed to open input: " << args.getString("input")
                   << "\n";
+
         return 1;
     }
 
     std::vector<std::uint8_t> bytes;
     if (args.getFlag("hex")) {
         std::stringstream buffer;
+
         buffer << input.rdbuf();
+
         bytes = hexToBytes(buffer.str());
     } else {
         bytes.assign(
@@ -48,11 +53,13 @@ int main(int argc, char *argv[]) {
     std::ostream *out = &std::cout;
     if (!args.getString("output").empty()) {
         outputFile.open(args.getString("output"));
+
         if (!outputFile) {
             std::cerr << "Failed to open output: " << args.getString("output")
                       << "\n";
             return 1;
         }
+
         out = &outputFile;
     }
 

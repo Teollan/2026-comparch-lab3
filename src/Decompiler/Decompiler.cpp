@@ -14,6 +14,8 @@ std::vector<Instruction> decompile(std::vector<std::uint8_t> &bytes) {
 
             if (prototype.doesMatch(instructionBytes)) {
                 instruction.emplace(prototype, instructionBytes);
+
+                break;
             }
         }
 

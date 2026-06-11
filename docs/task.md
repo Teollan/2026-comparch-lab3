@@ -38,5 +38,3 @@ Templates to support: **2, 3, 6, 7, 8, 9, 26, 28, 29**.
 | 26 | Compare `<reg1>` and `<reg2>`; set flags (Intel-style).                        |
 | 28 | Load 2-byte signed literal into `<reg>`.                                       |
 | 29 | Load 4-byte signed literal into `<reg>`.                                       |
-
-## Decoder notes

@@ -16,6 +16,7 @@ Args &Args::expectString(
     _strings[name] = {shortName, required, "", false};
     _aliases["--" + name] = name;
     _aliases["-" + shortName] = name;
+
     return *this;
 }
 
@@ -23,6 +24,7 @@ Args &Args::expectFlag(const std::string &name, const std::string &shortName) {
     _flags[name] = {shortName, false};
     _aliases["--" + name] = name;
     _aliases["-" + shortName] = name;
+
     return *this;
 }
 
@@ -46,6 +48,7 @@ Args &Args::parse() {
 
             stringArg->second.value = _argv[++i];
             stringArg->second.provided = true;
+
             continue;
         }
 

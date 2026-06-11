@@ -32,6 +32,7 @@ std::vector<std::uint8_t> hexToBytes(std::string_view hex) {
             while (i < hex.size() && hex[i] != '\n') {
                 i++;
             }
+
             continue;
         }
 
@@ -43,6 +44,7 @@ std::vector<std::uint8_t> hexToBytes(std::string_view hex) {
 
         if (high < 0) {
             high = value;
+
             continue;
         }
 
