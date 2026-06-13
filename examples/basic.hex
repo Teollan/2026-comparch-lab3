@@ -1,4 +1,4 @@
-// Single-byte-opcode instructions: SUB and CMP (templates 8, 26)
+// Інструкції з однобайтовим КОП: SUB та CMP (8, 26)
 
 0A 12  // SUB R1, R2
 0A 34  // SUB R3, R4

@@ -19,9 +19,7 @@ int main(int argc, char *argv[]) {
         args.parse();
     } catch (const ArgsException &e) {
         std::cerr << e.what() << "\n";
-
         args.printUsage();
-
         return 1;
     }
 
@@ -29,7 +27,6 @@ int main(int argc, char *argv[]) {
     if (!input) {
         std::cerr << "Failed to open input: " << args.getString("input")
                   << "\n";
-
         return 1;
     }
 

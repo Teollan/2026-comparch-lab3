@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+$pygments_css
+
+@page { size: A4; margin: 1.5cm; }
+
+body { font-family: 'FreeMono', monospace; font-size: 10pt; margin: 0; }
+
+.highlight { background: none !important; }
+
+.highlight pre { background: none !important; }
+
+pre { font-family: 'FreeMono', monospace; }
+
+h1.title {
+  font-family: 'Liberation Serif';
+  font-size: 18pt;
+  font-weight: bold;
+  text-align: left;
+}
+
+h2 {
+  font-family: 'Liberation Serif';
+  font-size: 12pt;
+  font-style: italic;
+  padding-bottom: 0.3em;
+}
+
+h3 {
+  font-family: 'Liberation Serif';
+  font-size: 12pt;
+  font-style: italic;
+  margin-top: 0.3em;
+}
+
+p {
+  font-family: 'Liberation Serif';
+  font-size: 12pt;
+  white-space: pre;
+}
+
+pre.output {
+  font-family: 'FreeMono', monospace;
+  font-size: 10pt;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+}
+
+img {
+  width: 50%;
+  height: auto;
+}
+
+</style>
+</head>
+<body>
+<h1 class="title">Результати тестування програми</h1>
+<p>&#9;Результати Unit-тестування (фреймворк GTest) наведені на скріншоті.</p>
+<div style="text-align: center;"><img src="./docs/unit_tests.png"/></div>
+
+$content
+</body>
+</html>

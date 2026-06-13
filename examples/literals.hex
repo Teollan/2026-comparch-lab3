@@ -1,9 +1,9 @@
-// MOV with signed-literal operands (templates 28, 29) — boundary values
+// MOV зі знаковими операндами-літералами (28, 29)
 
-1C 11 00 00              // MOV R1, 0          (lit16 zero)
-1C 11 7F FF              // MOV R1, 32767      (lit16 INT16_MAX)
-1C 1F FF FF              // MOV R15, -1        (lit16 all ones)
-1C 21 00 00 00 00        // MOV R1, 0          (lit32 zero)
-1C 21 33 44 55 66        // MOV R1, 860116326  (lit32 positive)
-1C 2F FF FF FF FF        // MOV R15, -1        (lit32 all ones)
+1C 11 00 00              // MOV R1, 0            (lit16 нуль)
+1C 11 7F FF              // MOV R1, 32767        (lit16 INT16_MAX)
+1C 1F FF FF              // MOV R15, -1          (lit16 всі одиниці)
+1C 21 00 00 00 00        // MOV R1, 0            (lit32 нуль)
+1C 21 33 44 55 66        // MOV R1, 860116326    (lit32 додатне)
+1C 2F FF FF FF FF        // MOV R15, -1          (lit32 всі одиниці)
 1C 2F 80 00 00 00        // MOV R15, -2147483648 (lit32 INT32_MIN)
