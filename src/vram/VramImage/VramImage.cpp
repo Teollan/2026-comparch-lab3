@@ -1,8 +1,11 @@
 #include "vram/VramImage/VramImage.hpp"
 
+#include <cstddef>
 #include <cstdint>
+#include <format>
 #include <fstream>
 #include <memory>
+#include <stdexcept>
 #include <string>
 #include <utility>
 #include <vector>
@@ -12,6 +15,9 @@
 #include "vram/SegmentsTable/SegmentsTable.hpp"
 
 namespace {
+
+const std::size_t MAX_SEGMENTS = 4096;
+const std::size_t MAX_PAGES = 1024;
 
 PagesTable loadPagesTable(const std::filesystem::path& path) {
     std::ifstream file(path);
@@ -25,6 +31,17 @@ PagesTable loadPagesTable(const std::filesystem::path& path) {
 
         pages.push_back(
             PageDescriptor{.isResident = isResident, .frame = frame}
+        );
+    }
+
+    if (pages.size() > MAX_PAGES) {
+        throw std::runtime_error(
+            std::format(
+                "pages table '{}' has {} entries, exceeding the {}-page limit",
+                path.string(),
+                pages.size(),
+                MAX_PAGES
+            )
         );
     }
 
@@ -45,6 +62,18 @@ Vram VramImage::load(const std::filesystem::path& path) {
                 .pagesTable =
                     std::make_unique<PagesTable>(loadPagesTable(row.at(0)))
             }
+        );
+    }
+
+    if (segments.size() > MAX_SEGMENTS) {
+        throw std::runtime_error(
+            std::format(
+                "segments table '{}' has {} entries, exceeding the {}-segment "
+                "limit",
+                path.string(),
+                segments.size(),
+                MAX_SEGMENTS
+            )
         );
     }
 

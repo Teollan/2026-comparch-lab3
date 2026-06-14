@@ -1,27 +1,20 @@
-// Variant 6 - segment-paged virtual memory, memory-access instructions only.
-//
-// Virtual address layout (32 bits):  [ segment : 12 ][ page : 10 ][ offset : 10 ]
-// Physical address:                  ( frame << 10 ) | offset
-//
-// Run from the project root:
-//   ./build/app -x -i examples/example-program.hex -s examples/example-segments.csv
-//
-// Each line below lists: encoding  // disassembly  -> expected physical / error
+// Структура віртуальної адреси:  [ segment : 12 ][ page : 10 ][ offset : 10 ]
+// Структура фізичної адреси:     [ frame : 22                ][ offset : 10 ]
 
-// (2) MOV <reg>, <addr>   seg 0 / page 0 / off 42 -> frame 16, resident
-1B 01 00 00 00 2A   // MOV R1, [0x0000002A]        -> [0x0000402A]
+// [0][0][42] -> кадр 16, в пам'яті
+1B 01 00 00 00 2A   // MOV R1, [0x0000002A] -> [0x0000402A]
 
-// (7) ADD <reg>, <reg>, <addr>   seg 1 / page 0 / off 256 -> frame 32, resident
-04 34 00 10 01 00   // ADD R3, R4, [0x00100100]    -> [0x00008100]
+// [1][0][256] -> кадр 32, в пам'яті
+04 34 00 10 01 00   // ADD R3, R4, [0x00100100] -> [0x00008100]
 
-// (9) SUB <reg>, <addr>   seg 1 / page 1 -> present flag 0 (paged out)
-0B 05 00 10 04 55   // SUB R5, [0x00100455]        -> page fault
+// [1][1][85] -> сторінка вивантажена
+0B 05 00 10 04 55   // SUB R5, [0x00100455] -> вивантажена сторінка
 
-// (3) MOV <addr>, <reg>   seg 2 / page 4 -> past the segment's 4 pages
-1B 16 00 20 10 00   // MOV [0x00201000], R6        -> unmapped page
+// [2][123][0] -> стор. 123 за межами 4 сторінок сегмента
+1B 16 00 21 EC 00   // MOV [0x0021EC00], R6 -> відсутня сторінка
 
-// (2) MOV <reg>, <addr>   seg 5 -> no such segment in the segment table
-1B 07 00 50 00 00   // MOV R7, [0x00500000]        -> unmapped segment
+// [42][0][0] -> сегмента 42 немає в таблиці сегментів
+1B 07 02 A0 00 00   // MOV R7, [0x02A00000] -> відсутній сегмент
 
-// (9) SUB <reg>, <addr>   seg 3 / page 0 / off 171 -> frame 1023, resident
-0B 08 00 30 00 AB   // SUB R8, [0x003000AB]        -> [0x000FFCAB]
+// [3][0][171] -> кадр 1023, в пам'яті
+0B 08 00 30 00 AB   // SUB R8, [0x003000AB] -> [0x000FFCAB]
