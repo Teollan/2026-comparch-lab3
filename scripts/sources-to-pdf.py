@@ -10,7 +10,7 @@ from pygments.lexers import CppLexer
 from pygments.formatters import HtmlFormatter
 from weasyprint import HTML
 
-files = [Path("apps/app.cpp")]
+files = [Path("main.cpp")]
 modules = sorted(set(p.parent for p in Path("src").rglob("*.hpp")))
 for module in modules:
     files.extend(sorted(module.glob("*.hpp")))
@@ -40,7 +40,7 @@ output_dir.mkdir(parents=True, exist_ok=True)
 output = (
     sys.argv[1]
     if len(sys.argv) > 1
-    else str(output_dir / "lab_3_kv33_Kozlov_addon_A.pdf")
+    else str(output_dir / "lab_4_kv33_Kozlov_addon_A.pdf")
 )
 HTML(string=html).write_pdf(output)
 print(f"Generated {output}")

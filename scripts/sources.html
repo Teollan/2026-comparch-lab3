@@ -1,44 +1,59 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<style>
-$pygments_css
+  <style>
+    $pygments_css @page {
+      size: A4;
+      margin: 1.5cm;
+    }
 
-@page { size: A4; margin: 1.5cm; }
+    body {
+      font-family: 'FreeMono', monospace;
+      font-size: 10pt;
+      margin: 0;
+    }
 
-body { font-family: 'FreeMono', monospace; font-size: 10pt; margin: 0; }
+    .highlight {
+      background: none !important;
+    }
 
-.highlight { background: none !important; }
+    .highlight pre {
+      background: none !important;
+    }
 
-.highlight pre { background: none !important; }
+    pre {
+      font-family: 'FreeMono', monospace;
+    }
 
-pre { font-family: 'FreeMono', monospace; }
+    h1.title {
+      font-family: 'Liberation Serif';
+      font-size: 18pt;
+      font-weight: bold;
+    }
 
-h1.title {
-  font-family: 'Liberation Serif';
-  font-size: 18pt;
-  font-weight: bold;
-}
+    h2 {
+      font-family: 'Liberation Serif';
+      font-size: 12pt;
+      font-style: italic;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 0.3em;
+    }
 
-h2 {
-  font-family: 'Liberation Serif';
-  font-size: 12pt;
-  font-style: italic;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 0.3em;
-}
-
-p {
-  font-family: 'Liberation Serif';
-  font-size: 12pt;
-  white-space: pre;
-}
-
-</style>
+    p {
+      font-family: 'Liberation Serif';
+      font-size: 12pt;
+      white-space: pre;
+    }
+  </style>
 </head>
+
 <body>
-<h1 class="title">Лістинг коду програми</h1>
-<p>&#9;Вихідні файли також доступні за посиланням <a href="https://github.com/Teollan/2026-comparch-lab3">https://github.com/Teollan/2026-comparch-lab3</a>.</p>
-$content
+  <h1 class="title">Лістинг коду програми</h1>
+  <p>&#9;Вихідні файли також доступні за посиланням <a
+      href="https://github.com/Teollan/2026-comparch-lab3/tree/lab4">https://github.com/Teollan/2026-comparch-lab3/tree/lab4</a>.
+  </p>
+  $content
 </body>
+
 </html>
