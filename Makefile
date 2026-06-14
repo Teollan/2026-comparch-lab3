@@ -1,19 +1,19 @@
 .PHONY: build run test lint format clean
 
-CXX := g++-14
-CC  := gcc-14
+CXX ?= g++
+CC  ?= gcc
 
 build:
 	cmake -B build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=$(CXX) -DCMAKE_C_COMPILER=$(CC)
 	cmake --build build
 
 run: build
-	./build/apps/app
+	./build/app
 
 test: build
 	ctest --test-dir build --output-on-failure
 
-SOURCES := $(shell find apps src -name '*.cpp' -o -name '*.hpp' -o -name '*.tpp' 2>/dev/null)
+SOURCES := main.cpp $(shell find src -name '*.cpp' -o -name '*.hpp' -o -name '*.tpp' 2>/dev/null)
 
 format:
 	clang-format -i $(SOURCES)

@@ -3,10 +3,10 @@ Checks: >
     bugprone-*,
     modernize-*,
     readability-*,
+    cppcoreguidelines-*,
+    performance-*,
     -modernize-use-trailing-return-type,
-    -readability-magic-numbers,
-    -readability-identifier-length
 
-HeaderFilterRegex: '(src|apps)/.*'
+HeaderFilterRegex: '(src|apps|tests)/.*'
 
 WarningsAsErrors: ''

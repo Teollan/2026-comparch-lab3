@@ -1,5 +1,4 @@
 file(GLOB_RECURSE ALL_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
-file(GLOB_RECURSE LIB_HEADERS CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/*.hpp")
 file(GLOB_RECURSE TEST_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/*.test.cpp")
 
 set(LIB_SOURCES ${ALL_SOURCES})
@@ -7,23 +6,15 @@ if(TEST_SOURCES)
     list(REMOVE_ITEM LIB_SOURCES ${TEST_SOURCES})
 endif()
 
-set(INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}")
-foreach(HEADER ${LIB_HEADERS})
-    get_filename_component(DIR ${HEADER} DIRECTORY)
-    list(APPEND INCLUDE_DIRS ${DIR})
-endforeach()
-list(REMOVE_DUPLICATES INCLUDE_DIRS)
-
 if(LIB_SOURCES)
     add_library(decompiler_lib STATIC ${LIB_SOURCES})
-    target_include_directories(decompiler_lib PUBLIC ${INCLUDE_DIRS})
+    target_include_directories(decompiler_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
     set_project_warnings(decompiler_lib)
 else()
     add_library(decompiler_lib INTERFACE)
-    target_include_directories(decompiler_lib INTERFACE ${INCLUDE_DIRS})
+    target_include_directories(decompiler_lib INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
 endif()
 
-# --- Co-located unit tests (*.test.cpp next to source) ---
 include(GoogleTest)
 
 foreach(TEST_SOURCE ${TEST_SOURCES})

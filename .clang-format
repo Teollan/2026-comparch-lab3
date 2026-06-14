@@ -1,13 +1,13 @@
 BasedOnStyle: Google
+Standard: c++20
 IndentWidth: 4
 ColumnLimit: 80
 AccessModifierOffset: -4
 AllowShortFunctionsOnASingleLine: Empty
 AllowShortIfStatementsOnASingleLine: Never
 AlignAfterOpenBracket: BlockIndent
-BinPackArguments: false
 BinPackParameters: false
-AllowAllArgumentsOnNextLine: true
-AllowAllParametersOfDeclarationOnNextLine: true
+BinPackArguments: false
+AllowAllParametersOfDeclarationOnNextLine: false
 BreakConstructorInitializers: AfterColon
 PenaltyReturnTypeOnItsOwnLine: 10000

@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.20)
 
 if(NOT DEFINED CMAKE_CXX_COMPILER AND NOT DEFINED ENV{CXX})
-    set(CMAKE_CXX_COMPILER g++-14)
+    set(CMAKE_CXX_COMPILER g++)
 endif()
 if(NOT DEFINED CMAKE_C_COMPILER AND NOT DEFINED ENV{CC})
-    set(CMAKE_C_COMPILER gcc-14)
+    set(CMAKE_C_COMPILER gcc)
 endif()
 
 project(decompiler LANGUAGES CXX)
@@ -45,5 +45,8 @@ endif()
 enable_testing()
 
 add_subdirectory(src)
-add_subdirectory(apps)
 add_subdirectory(tests)
+
+add_executable(app main.cpp)
+target_link_libraries(app PRIVATE decompiler_lib)
+set_project_warnings(app)

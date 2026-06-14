@@ -1,0 +1,65 @@
+#include "assembly/Operand/Operand.hpp"
+
+#include <bit>
+#include <format>
+#include <utility>
+
+std::string formatOperandBytes(
+    const std::vector<std::uint8_t>& bytes,
+    OperandType type
+) {
+    switch (type) {
+        case OperandType::Register:
+            return formatRegister(bytes[0]);
+        case OperandType::Address:
+            return formatAddress(bytes);
+        case OperandType::Literal16:
+            return formatLiteral16(bytes);
+        case OperandType::Literal32:
+            return formatLiteral32(bytes);
+    }
+
+    std::unreachable();
+}
+
+std::string formatRegister(std::uint8_t byte) {
+    return std::format("R{}", byte & 0x0F);
+}
+
+std::string formatAddress(const std::vector<std::uint8_t>& bytes) {
+    std::uint32_t address =
+        (std::uint32_t(bytes[0]) << 24) | (std::uint32_t(bytes[1]) << 16) |
+        (std::uint32_t(bytes[2]) << 8) | std::uint32_t(bytes[3]);
+
+    return std::format("[0x{:08X}]", address);
+}
+
+std::string formatLiteral16(const std::vector<std::uint8_t>& bytes) {
+    std::uint16_t raw =
+        (std::uint16_t(bytes[0]) << 8) | std::uint16_t(bytes[1]);
+
+    return std::format("{}", std::bit_cast<std::int16_t>(raw));
+}
+
+std::string formatLiteral32(const std::vector<std::uint8_t>& bytes) {
+    std::uint32_t raw =
+        (std::uint32_t(bytes[0]) << 24) | (std::uint32_t(bytes[1]) << 16) |
+        (std::uint32_t(bytes[2]) << 8) | std::uint32_t(bytes[3]);
+
+    return std::format("{}", std::bit_cast<std::int32_t>(raw));
+}
+
+std::uint8_t getOperandBitWidth(OperandType type) {
+    switch (type) {
+        case OperandType::Register:
+            return 4;
+        case OperandType::Address:
+            return 32;
+        case OperandType::Literal16:
+            return 16;
+        case OperandType::Literal32:
+            return 32;
+    }
+
+    std::unreachable();
+}
